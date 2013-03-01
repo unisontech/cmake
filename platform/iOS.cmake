@@ -18,6 +18,8 @@ endif()
 
 set(QT_QMAKE_EXECUTABLE "${iOS_QT}/bin/qmake")
 
-set( CMAKE_FIND_ROOT_PATH ${CMAKE_FIND_ROOT_PATH} "/")
+set(CMAKE_FIND_ROOT_PATH ${CMAKE_FIND_ROOT_PATH} "/")
+
+include_directories("${PLATFORM_OPENSSL_PATH}/include/openssl")
 
 message(STATUS "QT_QMAKE_EXECUTABLE: ${QT_QMAKE_EXECUTABLE}")

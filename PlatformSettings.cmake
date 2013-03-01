@@ -3,6 +3,13 @@
 # so it should be used for every executable on add_executable
 #
 # android can be built on any system, so we check target system explicitly first
+
+# build type
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+message(STATUS "CMake build type: ${CMAKE_BUILD_TYPE}")
+
 set(LIBRARY_TYPE SHARED)
 
 if(${CMAKE_TARGET_SYSTEM} MATCHES "Android")

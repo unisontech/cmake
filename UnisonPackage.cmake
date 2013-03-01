@@ -19,7 +19,7 @@ else()
     set(DOC_INSTALL_DIR ".")
 endif()
 
-set(ICONS_DIR "${${PROJECT_NAME}_SOURCE_DIR}/src/app/icons")
+set(ICONS_DIR "${CMAKE_SOURCE_DIR}/src/resources/icons")
 
 add_definitions(-DPROJECT_VERSION=\"${PROJECT_VERSION}\")
 

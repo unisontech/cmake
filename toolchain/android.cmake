@@ -1,6 +1,7 @@
 message(STATUS "Using Android CMake Toolchain")
 # ------------------------------------------------------------------------------
 # vblinov: setup reasonable defaults for our project
+set(ANDROID true)
 set(ANDROID_ABI "armeabi" CACHE STRING "ABI type. See android.cmake toolchain file for details on ABI")
 set(ANDROID_NATIVE_API_LEVEL "android-8")
 

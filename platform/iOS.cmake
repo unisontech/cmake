@@ -2,7 +2,7 @@
 
 # this is important for iOS executables
 SET(APP_TYPE MACOSX_BUNDLE)
-set(LIBRARY_TYPE STATIC)
+set(BUILD_SHARED_LIBS false)
 
 ###############################
 # Qt SETTINGS                 #

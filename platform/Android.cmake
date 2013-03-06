@@ -3,7 +3,7 @@
 ###############################
 # TOOLCHAIN SETTINGS          #
 ###############################
-set(LIBRARY_TYPE STATIC)
+set(BUILD_SHARED_LIBS false)
 
 if( CMAKE_HOST_WIN32 AND NOT CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
    message( "You need to use MinGW Makefile generator explicitly")

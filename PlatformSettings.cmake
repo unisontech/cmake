@@ -10,7 +10,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 message(STATUS "CMake build type: ${CMAKE_BUILD_TYPE}")
 
-set(LIBRARY_TYPE SHARED)
+set(BUILD_SHARED_LIBS true)
 
 if(ANDROID)
     set(PLATFORM "Android")

@@ -5,6 +5,9 @@
 # android can be built on any system, so we check target system explicitly first
 
 # build type
+if(NOT PLATFORM_SETTINGS_DONE)
+
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
@@ -46,3 +49,7 @@ endif()
 if (EXISTS ${CMAKE_TOOLCHAIN_FILE})
     message(STATUS "Using custom toolchain file ${CMAKE_TOOLCHAIN_FILE}")
 endif(EXISTS ${CMAKE_TOOLCHAIN_FILE})
+
+
+set(PLATFORM_SETTINGS_DONE true)
+endif(NOT PLATFORM_SETTINGS_DONE)

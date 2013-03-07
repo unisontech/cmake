@@ -48,7 +48,7 @@ set(CMAKE_FIND_ROOT_PATH
 set(CMAKE_C_COMPILER   "${OSX_DEVELOPER_ROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" CACHE PATH "C compiler" FORCE)
 set(CMAKE_CXX_COMPILER "${OSX_DEVELOPER_ROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++" CACHE PATH "C++ compiler" FORCE)
 
-set(CMAKE_C_FLAGS "-isysroot ${IOS_SDK_ROOT} -miphoneos-version-min=4.3 -arch ${IOS_ARCH} -fvisibility=hidden" CACHE STRING "C flags" FORCE)
+set(CMAKE_C_FLAGS "-isysroot ${IOS_SDK_ROOT} -miphoneos-version-min=4.3 -arch ${IOS_ARCH}" CACHE STRING "C flags" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "C++ flags" FORCE)
 
 set(CMAKE_CXX_COMPILER_WORKS TRUE)

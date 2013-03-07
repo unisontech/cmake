@@ -1,12 +1,60 @@
 message(STATUS "Using Android CMake Toolchain")
+cmake_policy(SET CMP0007 NEW)
 # ------------------------------------------------------------------------------
 # vblinov: setup reasonable defaults for our project
-set(ANDROID true)
+#set(LIBRARY_OUTPUT_PATH_ROOT "${CMAKE_SOURCE_DIR}/jni")
+#set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/jni")
 set(ANDROID_ABI "armeabi" CACHE STRING "ABI type. See android.cmake toolchain file for details on ABI")
+set(ANDROID_JAVA_API_LEVEL "android-8")
 set(ANDROID_NATIVE_API_LEVEL "android-8")
 
+message(STATUS "Android Java API level: ${ANDROID_JAVA_API_LEVEL}")
 message(STATUS "Android ABI: ${ANDROID_ABI}")
 message(STATUS "Android Native API level: ${ANDROID_NATIVE_API_LEVEL}")
+
+
+# ------------------------------------------------------------------------------
+# vblinov: calculate android java api level id
+#
+# Usage:
+#   ANDROID_JAVA_API_LEVEL: api level for java project build
+#                           by default it is same as ANDROID_NATIVE_API_LEVEL
+#
+#   ANDROID_JAVA_API_ID: id of java api level
+#   ANDROID_TOOL: path to android executable, calculated using ANDROID_SDK env variable
+#
+#   ADD_ANDROID_APPLICATION(my_app) : macro to add android application build
+#
+set(DEFAULT_JAVA_API_LEVEL ${ANDROID_NATIVE_API_LEVEL})
+if (NOT ${ANDROID_JAVA_API_LEVEL} STREQUAL "")
+    set(DEFAULT_JAVA_API_LEVEL ${ANDROID_JAVA_API_LEVEL})
+endif()
+
+set(ANDROID_JAVA_API_LEVEL "${ANDROID_JAVA_API_LEVEL}" CACHE STRING "Android API level for Java code" FORCE )
+execute_process(COMMAND ${ANDROID_TOOL} list target -c
+                OUTPUT_VARIABLE ANDROID_TARGETS)
+string(REPLACE "\n" ";" ANDROID_TARGETS ${ANDROID_TARGETS})
+list(LENGTH ANDROID_TARGETS ANDROID_TARGETS_COUNT)
+list(FIND ANDROID_TARGETS ${ANDROID_JAVA_API_LEVEL} ANDROID_JAVA_API_ID)
+if(ANDROID_JAVA_API_ID EQUAL -1)
+    message(FATAL_ERROR "Looks like you haven't installed SDK Platform for API level ${ANDROID_JAVA_API_LEVEL}. Please, make sure you have it installed")
+endif()
+
+math(EXPR ANDROID_JAVA_API_ID "${ANDROID_JAVA_API_ID} + 1" )
+# ------------------------------------------------------------------------------
+# vblinov: macros to help build android java projects in cmake
+set(ANDROID_TOOL $ENV{ANDROID_SDK}/tools/android)
+if(NOT EXISTS ${ANDROID_TOOL})
+    message(FATAL_ERROR "Failed to find `android` tool. Please make sure you have ANDROID_SDK environment variable defined")
+endif()
+
+macro(ADD_ANDROID_APPLICATION TARGET_NAME)
+    string(TOLOWER ${CMAKE_BUILD_TYPE} ANDROID_BUILD_TYPE)
+    add_custom_target(${TARGET_NAME} ALL
+                  COMMAND cmake -E chdir ${CMAKE_CURRENT_SOURCE_DIR} ${ANDROID_TOOL} update project --target ${ANDROID_JAVA_API_ID} --path ${CMAKE_CURRENT_SOURCE_DIR} --name ${TARGET_NAME}
+                  COMMAND cmake -E chdir ${CMAKE_CURRENT_SOURCE_DIR} ant ${ANDROID_BUILD_TYPE}
+                  )
+endmacro()
 # ------------------------------------------------------------------------------
 #  Android CMake toolchain file, for use with the Android NDK r5-r8
 #  Requires cmake 2.6.3 or newer (2.8.5 or newer is recommended).

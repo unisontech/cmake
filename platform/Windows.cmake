@@ -1,5 +1,6 @@
 # on Windows app type should be WIN32
 SET(APP_TYPE WIN32)
+set(BUILD_SHARED_LIBS false)
 
 if(NOT BUILD_SHARED_LIBS)
     # define openssl install directory

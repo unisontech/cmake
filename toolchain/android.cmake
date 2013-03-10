@@ -1,5 +1,6 @@
 message(STATUS "Using Android CMake Toolchain")
 cmake_policy(SET CMP0007 NEW)
+cmake_policy(SET CMP0011 NEW)
 # ------------------------------------------------------------------------------
 # vblinov: setup reasonable defaults for our project
 #set(LIBRARY_OUTPUT_PATH_ROOT "${CMAKE_SOURCE_DIR}/jni")
@@ -25,6 +26,12 @@ message(STATUS "Android Native API level: ${ANDROID_NATIVE_API_LEVEL}")
 #
 #   ADD_ANDROID_APPLICATION(my_app) : macro to add android application build
 #
+set(ANDROID_TOOL $ENV{ANDROID_SDK}/tools/android)
+if(NOT EXISTS ${ANDROID_TOOL})
+    message(FATAL_ERROR "Failed to find `android` tool. Please make sure you have ANDROID_SDK environment variable defined")
+endif()
+
+
 set(DEFAULT_JAVA_API_LEVEL ${ANDROID_NATIVE_API_LEVEL})
 if (NOT ${ANDROID_JAVA_API_LEVEL} STREQUAL "")
     set(DEFAULT_JAVA_API_LEVEL ${ANDROID_JAVA_API_LEVEL})
@@ -33,6 +40,9 @@ endif()
 set(ANDROID_JAVA_API_LEVEL "${ANDROID_JAVA_API_LEVEL}" CACHE STRING "Android API level for Java code" FORCE )
 execute_process(COMMAND ${ANDROID_TOOL} list target -c
                 OUTPUT_VARIABLE ANDROID_TARGETS)
+if(ANDROID_TARGETS STREQUAL "")
+    message(FATAL_ERROR "Looks like you haven't installed SDK Platform for API level ${ANDROID_JAVA_API_LEVEL}. Please, make sure you have it installed")
+endif()
 string(REPLACE "\n" ";" ANDROID_TARGETS ${ANDROID_TARGETS})
 list(LENGTH ANDROID_TARGETS ANDROID_TARGETS_COUNT)
 list(FIND ANDROID_TARGETS ${ANDROID_JAVA_API_LEVEL} ANDROID_JAVA_API_ID)
@@ -43,10 +53,6 @@ endif()
 math(EXPR ANDROID_JAVA_API_ID "${ANDROID_JAVA_API_ID} + 1" )
 # ------------------------------------------------------------------------------
 # vblinov: macros to help build android java projects in cmake
-set(ANDROID_TOOL $ENV{ANDROID_SDK}/tools/android)
-if(NOT EXISTS ${ANDROID_TOOL})
-    message(FATAL_ERROR "Failed to find `android` tool. Please make sure you have ANDROID_SDK environment variable defined")
-endif()
 
 macro(ADD_ANDROID_APPLICATION TARGET_NAME)
     string(TOLOWER ${CMAKE_BUILD_TYPE} ANDROID_BUILD_TYPE)

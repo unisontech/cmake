@@ -1,13 +1,16 @@
 # --- functions
 
-function(extract_branch_name GIT_SYMBOLIC_REF BRANCH_NAME)
-    string(REPLACE "/" ";" BRANCH_PATH ${GIT_SYMBOLIC_REF})
-    list(LENGTH BRANCH_PATH PATH_LENGTH)
-    math(EXPR INDEX "${PATH_LENGTH} - 1" )
-    list(GET BRANCH_PATH ${INDEX} NEW_BRANCH_NAME)
-    set(${BRANCH_NAME} ${NEW_BRANCH_NAME} PARENT_SCOPE)
+function(extract_branch_name GIT_REVISION GIT_REFS BRANCH_NAME)
+    string(REPLACE "\n" ";" GIT_REF_LIST ${GIT_REFS})
+    foreach(GIT_REF ${GIT_REF_LIST})
+        string(REPLACE " " ";" GIT_REF_PAIR ${GIT_REF})
+        list(GET GIT_REF_PAIR 0 NEW_REVISION)
+        list(GET GIT_REF_PAIR 1 NEW_BRANCH_NAME)
+        if(NEW_REVISION EQUAL GIT_REVISION)
+            set(${BRANCH_NAME} ${NEW_BRANCH_NAME} PARENT_SCOPE)
+        endif()
+    endforeach(GIT_REF)
 endfunction()
-
 
 function(extract_version CURRENT_TAG MAJOR_VERSION MINOR_VERSION PATCH_VERSION COMMIT_HASH)
     string(REPLACE "-" ";" CURRENT_TAG ${CURRENT_TAG})
@@ -49,13 +52,17 @@ execute_process(COMMAND git describe --tags --always
 string(STRIP ${CURRENT_TAG} CURRENT_TAG)
 extract_version(${CURRENT_TAG} UNISON_VERSION_MAJOR UNISON_VERSION_MINOR UNISON_VERSION_PATCH UNISON_HASH)
 
-
-execute_process(COMMAND git symbolic-ref HEAD
+execute_process(COMMAND git rev-parse HEAD
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                OUTPUT_VARIABLE CURRENT_BRANCH
+                OUTPUT_VARIABLE CURRENT_REVISION
                 )
-string(STRIP ${CURRENT_BRANCH} CURRENT_BRANCH)
-extract_branch_name(${CURRENT_BRANCH} CURRENT_BRANCH)
+
+execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:short\) refs/heads
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                OUTPUT_VARIABLE CURRENT_REFS
+                )
+
+extract_branch_name(${CURRENT_REVISION} ${CURRENT_REFS} CURRENT_BRANCH)
 
 # variables exposing
 set(UNISON_VERSION "${UNISON_VERSION_MAJOR}.${UNISON_VERSION_MINOR}.${UNISON_VERSION_PATCH}")

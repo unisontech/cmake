@@ -6,6 +6,15 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mmacosx-version-min=10.6 -fvisibility=hidde
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.6 -fvisibility=hidden -fvisibility-inlines-hidden")
 set(CMAKE_LFLAGS "${CMAKE_LFLAGS} -mmacosx-version-min=10.6")
 
+if("${CMAKE_OSX_SYSROOT}" STREQUAL "")
+# a minimum version since we are using notification center
+    execute_process(COMMAND xcode-select --print-path
+                    OUTPUT_VARIABLE XCODE_ROOT)
+    string(STRIP ${XCODE_ROOT} XCODE_ROOT)
+    set(CMAKE_OSX_SYSROOT "${XCODE_ROOT}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/"
+        CACHE PATH "Active Xcode path with required MacOS X SDK" FORCE)
+endif()
+
 # on Mac OS X app type should be MACOSX_BUNDLE
 set(APP_TYPE MACOSX_BUNDLE)
 set(BUILD_SHARED_LIBS false)

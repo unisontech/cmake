@@ -7,16 +7,17 @@ if(NOT BUILD_SHARED_LIBS)
     # you can use http://slproweb.com/products/Win32OpenSSL.html
     # http://slproweb.com/download/Win32OpenSSL-1_0_1e.exe
     set(OPENSSL_DIR $ENV{OPENSSL_PATH})
-    if(OPENSSL_DIR STREQUAL "")
+    if("${OPENSSL_DIR}" STREQUAL "")
         # check default installation path
-        if("$ENV{HOMEDRIVE}\\OpenSSL-Win32" EXISTS)
-            set(OPENSSL_DIR "$ENV{HOMEDRIVE}\\OpenSSL-Win32")
+        if(EXISTS "$ENV{SYSTEMDRIVE}\\OpenSSL-Win32")
+            set(OPENSSL_DIR "$ENV{SYSTEMDRIVE}\\OpenSSL-Win32")
         else()
             message(FATAL_ERROR "Failed to find OpenSSL-Win32. Please setup OPENSSL_PATH environment variable to point to its install dir.")
         endif()
     endif()
 endif()
 
+message(STATUS "Found OpenSSL in: ${OPENSSL_DIR}")
 
 macro(ADD_WIN32_LIBS)
     # http://public.kitware.com/Bug/view.php?id=3222

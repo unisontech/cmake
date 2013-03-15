@@ -1,25 +1,22 @@
-#Make to assume crosscompiling
+set(CMAKE_SYSTEM_PROCESSOR "arm")
+set(IOS_TARGET "iPhoneOS")
+set(IOS_SDK_VERSION "6.0" CACHE STRING "SDK version" FORCE)
+set(CMAKE_OSX_SYSROOT "iphoneos${IOS_SDK_VERSION}" CACHE STRING "SDK version" FORCE)
+set(IOS_ARCH armv7)
+set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib/ios_device" CACHE PATH "path for ios device libs")
+
+
+
+##################################################
+### This a common part for both i386 and armv7 ###
+##################################################
+
 set(CMAKE_CROSSCOMPILING TRUE)
 
 set(CMAKE_SYSTEM_NAME "Darwin")
-set(CMAKE_SYSTEM_PROCESSOR "arm")
 
 set(APPLE 1)
 set(iOS 1)
-
-if( "${TARG}" STREQUAL "device" )
-	set(IOS_TARGET "iPhoneOS")
-	set(CMAKE_OSX_SYSROOT "iphoneos${IOS_SDK_VERSION}" CACHE STRING "SDK version" FORCE)
-	set(IOS_ARCH armv7)
-	set(CMAKE_BUILD_TYPE "${CFG}")
-	set( LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib/ios_device" CACHE PATH "path for ios device libs" )
-elseif( "${TARG}" STREQUAL "simulator" )
-	set(IOS_TARGET "iPhoneSimulator")
-	set(CMAKE_OSX_SYSROOT "iphonesimulator${IOS_SDK_VERSION}" CACHE STRING "SDK version" FORCE)
-	set(IOS_ARCH i386)
-	set(CMAKE_BUILD_TYPE Debug)
-	set( LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib/ios_simulator" CACHE PATH "path for ios simulator libs" )
-endif( "${TARG}" STREQUAL "device")
 
 find_program(CMAKE_XCODE_SELECT xcode-select)
 if(CMAKE_XCODE_SELECT)

@@ -1,6 +1,10 @@
 set(CMAKE_SYSTEM_PROCESSOR "i386")
 set(IOS_TARGET "iPhoneSimulator")
-set(IOS_SDK_VERSION "6.0" CACHE STRING "SDK version" FORCE)
+
+if(IOS_SDK_VERSION STREQUAL "")
+	set(IOS_SDK_VERSION "6.0" CACHE STRING "SDK version" FORCE)
+endif()
+
 set(CMAKE_OSX_SYSROOT "iphonesimulator${IOS_SDK_VERSION}" CACHE STRING "SDK version" FORCE)
 set(IOS_ARCH i386)
 set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib/ios_simulator" CACHE PATH "path for ios simulator libs")

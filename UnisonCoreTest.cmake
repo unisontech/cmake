@@ -9,6 +9,10 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
         ${ARGV2}
         )
 
+    if(WIN32)
+        add_win32_libs()
+    endif(WIN32)
+
     if(ANDROID)
         add_library(
             ${TARGET}
@@ -55,10 +59,6 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
         find_library(CARBON_LIBRARY Carbon REQUIRED)
         list(APPEND LIBS ${CARBON_LIBRARY})
     endif(MacOSX)
-
-    if(WIN32)
-        add_win32_libs()
-    endif(WIN32)
 
     target_link_libraries(
         ${TARGET}

@@ -5,11 +5,13 @@ function(extract_branch_name GIT_REVISION GIT_REFS BRANCH_NAME)
     foreach(GIT_REF ${GIT_REF_LIST})
         string(REPLACE " " ";" GIT_REF_PAIR ${GIT_REF})
         list(GET GIT_REF_PAIR 0 NEW_REVISION)
-        list(GET GIT_REF_PAIR 1 NEW_BRANCH_NAME)
+        list(GET GIT_REF_PAIR 1 NEW_BRANCH_PATH)
+        string(REPLACE "/" ";" NEW_BRANCH_PATH ${NEW_BRANCH_PATH})
+        list(GET NEW_BRANCH_PATH 1 NEW_BRANCH_NAME)
         string(STRIP ${NEW_REVISION} NEW_REVISION)
         string(STRIP ${GIT_REVISION} GIT_REVISION)
         string(STRIP ${NEW_BRANCH_NAME} NEW_BRANCH_NAME)
-        if(NEW_REVISION STREQUAL GIT_REVISION)
+        if(NEW_REVISION STREQUAL GIT_REVISION AND NOT NEW_BRANCH_NAME STREQUAL "HEAD")
             set(${BRANCH_NAME} ${NEW_BRANCH_NAME} PARENT_SCOPE)
         endif()
     endforeach(GIT_REF)
@@ -66,6 +68,8 @@ execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:sh
                 )
 
 extract_branch_name(${CURRENT_REVISION} ${CURRENT_REFS} CURRENT_BRANCH)
+
+message(STATUS "Current branch: ${CURRENT_BRANCH}")
 
 # variables exposing
 set(UNISON_VERSION "${UNISON_VERSION_MAJOR}.${UNISON_VERSION_MINOR}.${UNISON_VERSION_PATCH}")

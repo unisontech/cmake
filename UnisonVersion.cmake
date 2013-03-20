@@ -62,7 +62,7 @@ execute_process(COMMAND git rev-parse HEAD
                 OUTPUT_VARIABLE CURRENT_REVISION
                 )
 
-execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:short\) refs/heads
+execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:short\) refs/remotes/origin
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                 OUTPUT_VARIABLE CURRENT_REFS
                 )

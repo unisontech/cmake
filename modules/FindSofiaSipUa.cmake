@@ -1,13 +1,12 @@
 find_path(SOFIA_SIP_UA_INCLUDE_DIR 
   NAMES 
-    sofia_features.h
+    sofia-sip/sofia_features.h
   HINTS
     ${SOFIA_SIP_UA_ROOT_DIR}
     ENV SOFIA_SIP_UA_ROOT_DIR
   PATH_SUFFIXES
     include
     include/sofia-sip-1.12
-    include/sofia-sip-1.12/sofia-sip
   DOC
     "sofia-sip-ua include directory path"
 )
@@ -28,7 +27,7 @@ find_library(SOFIA_SIP_UA_LIBRARY
 
 # handle the QUIETLY and REQUIRED arguments and set SOFIA_SIP_UA_FOUND to TRUE if
 # all listed variables are TRUE
-include(${CMAKE_CURRENT_LIST_DIR}/FindPackageHandleStandardArgs.cmake)
+include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(SOFIA_SIP_UA
                                   REQUIRED_VARS SOFIA_SIP_UA_LIBRARY SOFIA_SIP_UA_INCLUDE_DIR)
 

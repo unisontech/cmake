@@ -17,4 +17,6 @@ endif()
 set(QT_ROOT $ENV{QT_ROOT} CACHE FILEPATH "Path to the directory there Qt4 for Android is located")
 set(QT_QMAKE_EXECUTABLE "${QT_ROOT}/bin/qmake")
 
+set(ARTIFACT_PLATFORM_NAME "android-armv7")
+
 include_directories()

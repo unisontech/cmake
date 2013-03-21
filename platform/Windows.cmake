@@ -27,3 +27,5 @@ macro(ADD_WIN32_LIBS)
         list(APPEND LIBS dnsapi Ws2_32 Imm32 Winmm crypt32 libeay32MT ssleay32MT)
     endif()
 endmacro()
+
+set(ARTIFACT_PLATFORM_NAME "windows-i386")

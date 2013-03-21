@@ -26,3 +26,5 @@ if(BUILD_SHARED_LIBS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
     set(CMAKE_LFLAGS "${CMAKE_LFLAGS} -fsanitize=address")
 endif()
+
+set(ARTIFACT_PLATFORM_NAME "macosx-x86_64")

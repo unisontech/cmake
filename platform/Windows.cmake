@@ -6,7 +6,7 @@ if(NOT BUILD_SHARED_LIBS)
     # define openssl install directory
     # you can use http://slproweb.com/products/Win32OpenSSL.html
     # http://slproweb.com/download/Win32OpenSSL-1_0_1e.exe
-    set(OPENSSL_DIR $ENV{OPENSSL_PATH})
+    set(OPENSSL_DIR $ENV{OPENSSL_ROOT_DIR})
     if("${OPENSSL_DIR}" STREQUAL "")
         # check default installation path
         if(EXISTS "$ENV{SYSTEMDRIVE}\\OpenSSL-Win32")

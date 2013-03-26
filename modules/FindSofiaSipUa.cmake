@@ -16,6 +16,7 @@ find_library(SOFIA_SIP_UA_LIBRARY
   NAMES
     sofia-sip-ua
     libsofia-sip-ua
+	libsofia_sip_ua
   HINTS
     ${SOFIA_SIP_UA_ROOT_DIR}
     ENV SOFIA_SIP_UA_ROOT_DIR

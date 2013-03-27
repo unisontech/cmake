@@ -32,6 +32,7 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
         ${TARGET}
         Core
         Test
+        Sql
         )
 
     if(iOS)
@@ -59,6 +60,11 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
         find_library(CARBON_LIBRARY Carbon REQUIRED)
         list(APPEND LIBS ${CARBON_LIBRARY})
     endif(MacOSX)
+
+    if(NOT BUILD_SHARED_LIBS)
+        find_library(QSQLITE_LIBRARY qsqlite HINTS "${QT_PLUGINS_DIR}" PATH_SUFFIXES "sqldrivers")
+        list(APPEND LIBS ${QSQLITE_LIBRARY})
+    endif()
 
     target_link_libraries(
         ${TARGET}

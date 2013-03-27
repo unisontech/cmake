@@ -62,6 +62,7 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
     endif(MacOSX)
 
     if(NOT BUILD_SHARED_LIBS AND QT_IS_STATIC)
+        add_definitions(QT_IS_STATIC)
         find_library(QSQLITE_LIBRARY qsqlite HINTS "${QT_PLUGINS_DIR}" PATH_SUFFIXES "sqldrivers")
         list(APPEND LIBS ${QSQLITE_LIBRARY})
     endif()

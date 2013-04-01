@@ -8,10 +8,8 @@ set(BUILD_SHARED_LIBS false)
 # Qt SETTINGS                 #
 ###############################
 
-if( "${TARG}" STREQUAL "device" AND "${CFG}" STREQUAL "Debug" )
-	set(iOS_QT $ENV{iOS_QT_DEVICE_DEBUG} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
-elseif( "${TARG}" STREQUAL "device" AND "${CFG}" STREQUAL "Release" )
-	set(iOS_QT $ENV{iOS_QT_DEVICE_RELEASE} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
+if( "${TARG}" STREQUAL "device" )
+	set(iOS_QT $ENV{iOS_QT_DEVICE} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
 elseif( "${TARG}" STREQUAL "simulator" )
 	set(iOS_QT $ENV{iOS_QT_SIMULATOR} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
 endif()

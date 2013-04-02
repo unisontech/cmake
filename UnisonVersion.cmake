@@ -6,8 +6,13 @@ function(extract_branch_name GIT_REVISION GIT_REFS BRANCH_NAME)
         string(REPLACE " " ";" GIT_REF_PAIR ${GIT_REF})
         list(GET GIT_REF_PAIR 0 NEW_REVISION)
         list(GET GIT_REF_PAIR 1 NEW_BRANCH_PATH)
-        string(REPLACE "/" ";" NEW_BRANCH_PATH ${NEW_BRANCH_PATH})
-        list(GET NEW_BRANCH_PATH 1 NEW_BRANCH_NAME)
+        string(FIND ${NEW_BRANCH_PATH} "/" FIND_SLASH_REZULT)
+        if(${FIND_SLASH_REZULT} EQUAL -1)
+            set(NEW_BRANCH_NAME ${NEW_BRANCH_PATH})
+        else(${FIND_SLASH_REZULT} EQUAL -1)
+            string(REPLACE "/" ";" NEW_BRANCH_PATH ${NEW_BRANCH_PATH})
+            list(GET NEW_BRANCH_PATH 1 NEW_BRANCH_NAME)
+        endif(${FIND_SLASH_REZULT} EQUAL -1)
         string(STRIP ${NEW_REVISION} NEW_REVISION)
         string(STRIP ${GIT_REVISION} GIT_REVISION)
         string(STRIP ${NEW_BRANCH_NAME} NEW_BRANCH_NAME)
@@ -62,7 +67,7 @@ execute_process(COMMAND git rev-parse HEAD
                 OUTPUT_VARIABLE CURRENT_REVISION
                 )
 
-execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:short\) refs/remotes/origin
+execute_process(COMMAND git for-each-ref --format=%\(objectname\)\ %\(refname:short\) refs
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                 OUTPUT_VARIABLE CURRENT_REFS
                 )

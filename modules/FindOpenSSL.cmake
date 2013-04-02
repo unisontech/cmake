@@ -88,47 +88,34 @@ if(WIN32 AND NOT CYGWIN)
     # ssleay32MD.lib is identical to ../ssleay32.lib
     find_library(LIB_EAY_DEBUG
       NAMES
-        libeay32MDd
-        libeay32d
+        libeay32MTd
       ${_OPENSSL_ROOT_HINTS_AND_PATHS}
       PATH_SUFFIXES
-        "lib"
-        "VC"
-        "lib/VC"
+        "lib/VC/static"
     )
 
     find_library(LIB_EAY_RELEASE
       NAMES
-        libeay32MD
-        libeay32
+        libeay32MT
       ${_OPENSSL_ROOT_HINTS_AND_PATHS}
       PATH_SUFFIXES
-        "lib"
-        "VC"
-        "lib/VC"
+        "lib/VC/static"
     )
 
     find_library(SSL_EAY_DEBUG
       NAMES
-        ssleay32MDd
-        ssleay32d
+        ssleay32MTd
       ${_OPENSSL_ROOT_HINTS_AND_PATHS}
       PATH_SUFFIXES
-        "lib"
-        "VC"
-        "lib/VC"
+        "lib/VC/static"
     )
 
     find_library(SSL_EAY_RELEASE
       NAMES
-        ssleay32MD
-        ssleay32
-        ssl
+        ssleay32MT
       ${_OPENSSL_ROOT_HINTS_AND_PATHS}
       PATH_SUFFIXES
-        "lib"
-        "VC"
-        "lib/VC"
+        "lib/VC/static"
     )
 
     set(LIB_EAY_LIBRARY_DEBUG "${LIB_EAY_DEBUG}")

@@ -76,6 +76,7 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
         ${QT_LIBRARIES}
         ${LIBS}
         ${SOFIA_SIP_UA_LIBRARIES}
+        ${OPENSSL_LIBRARIES}
         )
 
     if(NOT ANDROID)

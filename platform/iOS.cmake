@@ -8,15 +8,12 @@ set(BUILD_SHARED_LIBS false)
 # Qt SETTINGS                 #
 ###############################
 
-if( "${TARG}" STREQUAL "device" )
-	set(iOS_QT $ENV{iOS_QT_DEVICE} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
-elseif( "${TARG}" STREQUAL "simulator" )
-	set(iOS_QT $ENV{iOS_QT_SIMULATOR} CACHE FILEPATH "Path to the directory where Qt for iOS is located")
-endif()
-
 set(QT_QMAKE_EXECUTABLE "${iOS_QT}/bin/qmake")
 
 set(CMAKE_FIND_ROOT_PATH ${CMAKE_FIND_ROOT_PATH} "/")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 
 include_directories("${PLATFORM_OPENSSL_PATH}/include/openssl")
 

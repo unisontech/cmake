@@ -70,6 +70,8 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
     target_link_libraries(
         ${TARGET}
         ${UNISONCORE_LIBRARY}
+        ${UNISONCORE_LIBRARY}_media
+        ${LIBJINGLE_LIBRARIES}
         qt-json
         qxmpp
         ${QT_QTMAIN_LIBRARY}

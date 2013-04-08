@@ -27,4 +27,6 @@ if(BUILD_SHARED_LIBS)
     set(CMAKE_LFLAGS "${CMAKE_LFLAGS} -fsanitize=address")
 endif()
 
+add_definitions(-DPOSIX=1)
+
 set(ARTIFACT_PLATFORM_NAME "macosx-x86_64")

@@ -133,6 +133,117 @@ if(WIN32)
 	set_libjingle_libs(LIBJINGLE_LIBRARIES_RELEASE Release)
 	set_libjingle_libs(LIBJINGLE_LIBRARIES_DEBUG Debug)
 	set_libjingle_libs(LIBJINGLE_LIBRARIES ${CMAKE_BUILD_TYPE})
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+        macro(set_libjingle_libs VARNAME CONFIGURATION)
+                set(${VARNAME}
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libCNG.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libG711.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libG722.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libNetEq.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libPCM16B.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudio_coding_module.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudio_conference_mixer.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudio_device.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudio_processing.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudio_processing_sse2.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libaudioproc_debug_proto.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libbitrate_controller.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libcommon_video.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libcrnspr.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libcrnss.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libexpat.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libgenperf_libs.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libiLBC.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libiSAC.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libiSACFix.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libicudata.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libicui18n.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libicuuc.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_media.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_p2p.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_peerconnection.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_sound.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_xmpphelp.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjpeg_turbo.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjsoncpp.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libmedia_file.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libnss_static.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libopus.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libpaced_sender.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libprotobuf_full_do_not_use.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libprotobuf_lite.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libremote_bitrate_estimator.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libresampler.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/librtp_rtcp.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libsignal_processing.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libsqlite3.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libsrtp.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libsystem_wrappers.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libudp_transport.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvad.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_capture_module.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_coding_utility.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_engine_core.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_processing.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_processing_sse2.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvideo_render_module.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvoice_engine_core.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvpx.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvpx_asm_offsets.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvpx_asm_offsets_vp9.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libvpx_intrinsics.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libwebrtc_i420.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libwebrtc_opus.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libwebrtc_utility.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libwebrtc_video_coding.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libwebrtc_vp8.a
+                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libyuv.a
+                   )
+        endmacro()
+        set_libjingle_libs(LIBJINGLE_LIBRARIES_RELEASE Release)
+        set_libjingle_libs(LIBJINGLE_LIBRARIES_DEBUG Debug)
+        set_libjingle_libs(LIBJINGLE_LIBRARIES ${CMAKE_BUILD_TYPE})
+        find_library(AUDIOTOOLBOX_LIBRARY AudioToolbox REQUIRED)
+        find_library(COREAUDIO_LIBRARY CoreAudio REQUIRED)
+        find_library(CARBON_LIBRARY Carbon REQUIRED)
+        find_library(COCOA_LIBRARY Cocoa REQUIRED)
+        find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
+        find_library(SYSTEMCONFIGURATION_LIBRARY SystemConfiguration REQUIRED)
+        find_library(SECURITY_LIBRARY Security REQUIRED)
+        find_library(OPENGL_LIBRARY OpenGL REQUIRED)
+        find_library(COREVIDEO_LIBRARY CoreVideo REQUIRED)
+        find_library(QTKIT_LIBRARY QTKit REQUIRED)
+        list(APPEND LIBJINGLE_LIBRARIES ${AUDIOTOOLBOX_LIBRARY}
+                                        ${CARBON_LIBRARY}
+                                        ${COCOA_LIBRARY}
+                                        ${FOUNDATION_LIBRARY}
+                                        ${SYSTEMCONFIGURATION_LIBRARY}
+                                        ${SECURITY_LIBRARY}
+                                        ${OPENGL_LIBRARY}
+                                        ${COREVIDEO_LIBRARY}
+                                        ${COREAUDIO_LIBRARY}
+                                        ${QTKIT_LIBRARY})
+        list(APPEND LIBJINGLE_LIBRARIES_DEBUG ${AUDIOTOOLBOX_LIBRARY}
+                                              ${CARBON_LIBRARY}
+                                              ${COCOA_LIBRARY}
+                                              ${FOUNDATION_LIBRARY}
+                                              ${SYSTEMCONFIGURATION_LIBRARY}
+                                              ${SECURITY_LIBRARY}
+                                              ${OPENGL_LIBRARY}
+                                              ${COREVIDEO_LIBRARY}
+                                              ${COREAUDIO_LIBRARY}
+                                              ${QTKIT_LIBRARY})
+        list(APPEND LIBJINGLE_LIBRARIES_RELEASE ${AUDIOTOOLBOX_LIBRARY}
+                                                ${CARBON_LIBRARY}
+                                                ${COCOA_LIBRARY}
+                                                ${FOUNDATION_LIBRARY}
+                                                ${SYSTEMCONFIGURATION_LIBRARY}
+                                                ${SECURITY_LIBRARY}
+                                                ${OPENGL_LIBRARY}
+                                                ${COREVIDEO_LIBRARY}
+                                                ${COREAUDIO_LIBRARY}
+                                                ${QTKIT_LIBRARY})
 endif()
 
 # handle the QUIETLY and REQUIRED arguments and set SOFIA_SIP_UA_FOUND to TRUE if

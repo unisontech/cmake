@@ -80,7 +80,7 @@ if(WIN32)
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/icuuc.lib 
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/libjingle_media.lib 
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/libyuv.lib 
-			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/libjpeg.lib 
+                        #${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/libjpeg.lib
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/video_capture_module.lib 
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/webrtc_utility.lib 
 			${LIBJINGLE_ROOT_DIR}/build/${CONFIGURATION}/lib/audio_coding_module.lib 
@@ -165,7 +165,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_peerconnection.a
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_sound.a
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjingle_xmpphelp.a
-                        ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjpeg_turbo.a
+                        #${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjpeg_turbo.a
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libjsoncpp.a
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libmedia_file.a
                         ${LIBJINGLE_ROOT_DIR}/xcodebuild/${CONFIGURATION}/libnss_static.a

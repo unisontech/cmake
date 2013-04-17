@@ -63,8 +63,13 @@ macro(ADD_UNISON_CORE_TEST TARGET SOURCES)
 
     if(NOT BUILD_SHARED_LIBS AND QT_IS_STATIC)
         add_definitions(-DQT_IS_STATIC)
-        find_library(QSQLITE_LIBRARY qsqlite HINTS "${QT_PLUGINS_DIR}" PATH_SUFFIXES "sqldrivers")
-        list(APPEND LIBS ${QSQLITE_LIBRARY})
+        find_library(QSQLITE_LIBRARY_RELEASE qsqlite HINTS "${QT_PLUGINS_DIR}" PATH_SUFFIXES "sqldrivers")
+        find_library(QSQLITE_LIBRARY_DEBUG qsqlited HINTS "${QT_PLUGINS_DIR}" PATH_SUFFIXES "sqldrivers")
+        if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+            list(APPEND LIBS ${QSQLITE_LIBRARY_DEBUG})
+        elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+            list(APPEND LIBS ${QSQLITE_LIBRARY_RELEASE})
+        endif()
     endif()
 
     target_link_libraries(

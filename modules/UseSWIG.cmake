@@ -228,6 +228,7 @@ macro(SWIG_ADD_MODULE name language)
         #   MacOS  : libLIBRARY.jnilib
         #   Windows: LIBRARY.dll
         #   Linux  : libLIBRARY.so
+        #  Android : libLIBRARY.so
         set_target_properties (${SWIG_MODULE_${name}_REAL_NAME} PROPERTIES SUFFIX ".jnilib")
       endif ()
   endif ()

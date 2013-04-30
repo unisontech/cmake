@@ -54,11 +54,18 @@ math(EXPR ANDROID_JAVA_API_ID "${ANDROID_JAVA_API_ID} + 1" )
 # ------------------------------------------------------------------------------
 # vblinov: macros to help build android java projects in cmake
 
-macro(ADD_ANDROID_APPLICATION TARGET_NAME)
+macro(ADD_ANDROID_APPLICATION TARGET_NAME VERSION_NAME VERSION_CODE)
+    if ("${VERSION_CODE}" STREQUAL "")
+        set(VERSION_CODE 1)
+    endif()
+    if ("${VERSION_NAME}" STREQUAL "")
+        set(VERSION_NAME "snapshot")
+    endif()
+
     string(TOLOWER ${CMAKE_BUILD_TYPE} ANDROID_BUILD_TYPE)
     add_custom_target(${TARGET_NAME} ALL
                   COMMAND cmake -E chdir ${CMAKE_CURRENT_SOURCE_DIR} ${ANDROID_TOOL} update project --target ${ANDROID_JAVA_API_ID} --path ${CMAKE_CURRENT_SOURCE_DIR} --name ${TARGET_NAME}
-                  COMMAND cmake -E chdir ${CMAKE_CURRENT_SOURCE_DIR} ant ${ANDROID_BUILD_TYPE}
+                  COMMAND cmake -E chdir ${CMAKE_CURRENT_SOURCE_DIR} ant -Dversion.code=${VERSION_CODE} -Dversion.name=${VERSION_NAME} ${ANDROID_BUILD_TYPE}
                   )
 endmacro()
 # ------------------------------------------------------------------------------

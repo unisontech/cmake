@@ -6,7 +6,7 @@ cmake_policy(SET CMP0011 NEW)
 #set(LIBRARY_OUTPUT_PATH_ROOT "${CMAKE_SOURCE_DIR}/jni")
 #set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/jni")
 set(ANDROID_ABI "armeabi" CACHE STRING "ABI type. See android.cmake toolchain file for details on ABI")
-set(ANDROID_JAVA_API_LEVEL "android-8")
+set(ANDROID_JAVA_API_LEVEL "android-10")
 set(ANDROID_NATIVE_API_LEVEL "android-8")
 
 message(STATUS "Android Java API level: ${ANDROID_JAVA_API_LEVEL}")
